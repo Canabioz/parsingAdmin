@@ -1,0 +1,39 @@
+{% extends '@AdminParser/Layout/index.html.twig' %}
+{% block body %}
+    {{ wo_render_breadcrumbs() }}
+    <div class="count">
+        Count record :{{ pagination.getTotalItemCount }}
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, '#', 'a.id') }}</th>
+                <th>ParentId</th>
+                <th>Name</th>
+                <th>PartNum</th>
+                <th>Qty</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for article in pagination %}
+                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.parentId }}</td>
+                    <td>{{ article.name }}</td>
+                    <td>{{ article.partnum }}</td>
+                    <td>{{ article.qty }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <img alt="Embedded Image" src="data:image/png;base64,{{ image }}" style="display: block; margin: 0 auto">
+
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

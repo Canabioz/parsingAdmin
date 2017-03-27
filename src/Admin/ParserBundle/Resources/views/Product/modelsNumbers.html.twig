@@ -1,0 +1,47 @@
+{% extends '@AdminParser/Layout/index.html.twig' %}
+{% block body %}
+    {{ wo_render_breadcrumbs() }}
+    <div class="count">
+        Count record :{{ pagination.getTotalItemCount }}
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, '#', 'a.id') }}</th>
+                <th>ParentId</th>
+                <th>Name</th>
+                <th>Url</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in pagination %}
+                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                    {% if lastChildren is not null %}
+                        <td>
+                            <a href="{{ path('elements',{"id" : dateparsing.id, 'idsection' : article.id}) }}">{{ article.id }}</a>
+                        </td>
+                    {% else %}
+                        <td>
+                            <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' : article.id}) }}">{{ article.id }}</a>
+                        </td>
+                    {% endif %}
+                    <td>
+                        <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' : article.id}) }}">{{ article.id }}{{ article.parentId }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' : article.id}) }}">{{ article.id }}{{ article.name }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' : article.id}) }}">{{ article.id }}{{ article.url }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

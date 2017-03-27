@@ -1,0 +1,41 @@
+{% extends '@AdminParser/Layout/index.html.twig' %}
+{% block body %}
+    <div class="count">
+        Count record :{{ pagination.getTotalItemCount }}
+    </div>
+    {# sorting of properties based on query components #}
+    {#    <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
+        <th>{{ knp_pagination_sortable(pagination, 'Release', ['a.date', 'a.time']) }}</th>
+        </tr>#}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Url</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in pagination %}
+                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                    <td>
+                        <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' :  article.id }) }}">{{ article.id }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' :  article.id }) }}">{{ article.name }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('modelsNumber',{"id" : dateparsing.id, 'idsection' :  article.id }) }}">{{ article.url }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends '@AdminParser/Layout/index.html.twig' %}
+
+{% block menu %}
+    {% set menuItem = knp_menu_get('AdminParserBundle:BuilderAdmin:mainMenu', [], {'dateparsing': dateparsing}) %}
+    {{ knp_menu_render(menuItem) }}
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
